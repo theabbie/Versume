@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+@theme {
+  --color-canvas: #0a0a0a;
+  --color-panel: #111111;
+  --color-panel2: #161616;
+  --color-edge: #262626;
+  --color-edge2: #333333;
+  --color-fg: #fafafa;
+  --color-mute: #a1a1aa;
+  --color-dim: #71717a;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  height: 100%;
+  background: var(--color-canvas);
+  color: var(--color-fg);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #333 transparent;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #2c2c2c;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.react-flow {
+  background: #0a0a0a;
+}
+.react-flow__background {
+  background: #0a0a0a;
+}
+.react-flow__edge-path {
+  stroke: #52525b;
+  stroke-width: 1.5;
+}
+.react-flow__edge.selected .react-flow__edge-path {
+  stroke: #fafafa;
+}
+.react-flow__edge:hover .react-flow__edge-path {
+  stroke: #a1a1aa;
+}
+.react-flow__connection-path {
+  stroke: #d4d4d8;
+  stroke-width: 1.5;
+}
+.react-flow__handle {
+  width: 9px;
+  height: 9px;
+  background: #0a0a0a;
+  border: 1.5px solid #71717a;
+}
+.react-flow__handle:hover {
+  background: #fafafa;
+  border-color: #fafafa;
+}
+.react-flow__handle-connecting {
+  background: #fafafa;
+}
+.react-flow__node.selectable:focus {
+  outline: none;
+}
+.react-flow__attribution {
+  background: transparent;
+  color: #3f3f46;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+.pulse-dot {
+  animation: pulse-dot 1.4s ease-in-out infinite;
+}
+
+.cm-editor {
+  background: #0d0d0d !important;
+  height: 100%;
+  font-size: 12.5px;
+}
+.cm-editor .cm-gutters {
+  background: #0d0d0d !important;
+  border-right: 1px solid #1f1f1f !important;
+  color: #52525b !important;
+}
+.cm-editor .cm-activeLine {
+  background: #161616 !important;
+}
+.cm-editor .cm-activeLineGutter {
+  background: #161616 !important;
+  color: #a1a1aa !important;
+}
+.cm-editor .cm-cursor {
+  border-left-color: #fafafa !important;
+}
+.cm-editor .cm-selectionBackground, .cm-editor.cm-focused .cm-selectionBackground {
+  background: #27272a !important;
+}
+.cm-tooltip {
+  background: #161616 !important;
+  border: 1px solid #262626 !important;
+  color: #fafafa !important;
+}
