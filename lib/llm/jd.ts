@@ -26,9 +26,9 @@ export function normalizeJobUrl(input: string): string | null {
 export async function fetchJobDescription(input: string): Promise<FetchedJD> {
   const url = normalizeJobUrl(input);
   if (!url) throw new Error("That does not look like a valid URL.");
-  const res = await fetch(JINA_READER_BASE + url, {
-    headers: { Authorization: "Bearer " + JINA_API_KEY, "X-Timeout": "30" },
-  });
+  const headers: Record<string, string> = { "X-Timeout": "30" };
+  if (JINA_API_KEY) headers.Authorization = "Bearer " + JINA_API_KEY;
+  const res = await fetch(JINA_READER_BASE + url, { headers });
   if (!res.ok) throw new Error("Reader request failed (HTTP " + res.status + ")");
   const raw = await res.text();
   const titleMatch = /^Title:\s*(.+)$/m.exec(raw);

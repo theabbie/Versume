@@ -69,7 +69,7 @@ Each resume is a **DAG of immutable versions** with named branch pointers. A **v
 - `lib/graphql/template.ts` — onyx (sans) and quartz (serif) Latin Modern preamble templates.
 - `lib/storage/provider.ts` — `StorageProvider` interface with a `LocalProvider` (IndexedDB) implementation. A remote/authenticated provider can be dropped in without touching the UI.
 - `lib/llm/provider.ts` — `LLMProvider` interface for future graph-level tailoring. The `llmTailor` filter node already stores its job-description prompt inside version snapshots.
-- `lib/llm/firebase.ts` + `lib/llm/config.ts` — the live Gemini integration used by the LaTeX tab's AI panel (App Check attested, client-side only).
+- `lib/llm/firebase.ts` + `lib/llm/config.ts` — the live Gemini integration used by the LaTeX tab's AI panel (App Check attested, client-side). Firebase web creds live here (public by design); the Jina key is read from `NEXT_PUBLIC_JINA_API_KEY` at build.
 - `lib/llm/jd.ts` — the Jina Reader client; reads a job-board URL, strips noise, caps to the token budget, and surfaces a friendly error for 404 / login-walled / empty pages.
 - `lib/latex/engine.ts` — lazy singleton around the WASM engine. First compile per session fetches the prebuilt `swiftlatexpdftex.fmt`; everything else is fetched lazily from `/texlive`.
 
@@ -81,7 +81,14 @@ npm run dev     # http://localhost:3000
 npm run build   # static export to out/
 ```
 
-The Firebase and Jina keys live in `lib/llm/config.ts` (client-side by design for this local build — swap for your own before shipping).
+The **Firebase web config** (API key, app id, App Check site key) lives baked in `lib/llm/config.ts` — those are public client identifiers by design (security comes from App Check enforcement, not from secrecy). The **Jina** key is **not** in the repo: set it as a build-time env var before deploying if you want the job-link fetch to use a paid quota:
+
+```bash
+# .env.local for dev, or Vercel project env for prod (must be NEXT_PUBLIC_ to reach the client)
+NEXT_PUBLIC_JINA_API_KEY=your_jina_reader_key
+```
+
+Without it the Jina Reader call still works (at a lower anonymous quota); the feature degrades gracefully rather than failing.
 
 ## Deploy
 

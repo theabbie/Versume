@@ -10,5 +10,5 @@ export const APPCHECK_SITE_KEY = "6LcxhY8tAAAAAIrw2VM3oTUmJsdiLjX54OhyHdmI";
 
 export const AI_MODEL = "gemini-3.6-flash";
 
-export const JINA_API_KEY = "***REMOVED***";
 export const JINA_READER_BASE = "https://r.jina.ai/";
+export const JINA_API_KEY = process.env.NEXT_PUBLIC_JINA_API_KEY ?? "";
